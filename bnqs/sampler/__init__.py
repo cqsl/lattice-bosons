@@ -1,0 +1,1 @@
+from .occupations import LocalRule
