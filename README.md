@@ -13,3 +13,9 @@ Accompanying code for "Accurate neural quantum states for interacting lattice bo
     - `models/`: folder containing the flax linen modules.
     - `operators/`: folder containing the definition of some custom jax operators.
     - `sampler/`: folder containing our custom Metropolis-Hastings rule.
+
+## Content of the repository
+
+Quick example (8x8 at $U=8J$):
+
+`python vmc.py --jobid 1234 --parameters example.json`
