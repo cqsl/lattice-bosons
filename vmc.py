@@ -12,6 +12,7 @@ import bnqs.models as models
 
 from jax import config
 config.update("jax_enable_x64", True)
+# Check that the default jax backend is 'gpu'
 print(jax.default_backend())
 
 import optax
@@ -32,37 +33,37 @@ jobid = args.jobid
 pars = json.load(open(args.parameters))
 ld = os.path.dirname(args.parameters)
 
-N = pars['N']
-n_dim = pars['n_dim']
-extent = pars['extent']
-n_sites = pars['n_sites']
-pbc = pars['pbc']
-n_particles = pars['n_particles']
-U = pars['U']
+N = pars['N']	# Latteral dimension of the lattice (L in the main text)
+n_dim = pars['n_dim']	# Number of spatial dimensions
+extent = pars['extent']	# Latteral dimensions of the lattice along both axes, here (N, N)
+n_sites = pars['n_sites']	# Number of lattice sites
+pbc = pars['pbc']	# Whether to use PBCs, here (true, true)
+n_particles = pars['n_particles']	# Number of particles (N in the main text)
+U = pars['U']	# On-site interaction strength in units of J
 
-kernel_size = pars['kernel_size']
-features = pars['features']
-depth = pars['depth']
+kernel_size = pars['kernel_size']	# Size of the convolutional filters
+features = pars['features']	# Number of channels per convolutional layer
+depth = pars['depth']	# Number of layers
 
-n_samples = pars['n_samples']
-chunk_size = pars['chunk_size']
-n_chains = pars['n_chains']
-sweep_factor = pars['sweep_factor']
-n_sweeps = pars['n_sweeps']
-n_discard_per_chain = pars['n_discard_per_chain']
-n_burnin = pars['n_burnin']
+n_samples = pars['n_samples']	# Number of samples
+chunk_size = pars['chunk_size']	# Chunk size
+n_chains = pars['n_chains']	# Number of Markov chains
+sweep_factor = pars['sweep_factor']	# sweep_size = sweep_factor * n_sweeps
+n_sweeps = pars['n_sweeps']	# Number of Metropolis-Hastings steps per sample / sweep_factor
+n_discard_per_chain = pars['n_discard_per_chain']	# Number of samples discarded at each step
+n_burnin = pars['n_burnin']	# Number of burn-in samples for thermalizing the chains
 
-n_iter_jastrow = pars['n_iter_jastrow']
-lrate_jastrow = pars['lrate_jastrow']
-dshift_jastrow = pars['dshift_jastrow']
+n_iter_jastrow = pars['n_iter_jastrow']	# Number of optimization steps for bare Jastrow
+lrate_jastrow = pars['lrate_jastrow']	# Learning rate for the Jastrow optimization
+dshift_jastrow = pars['dshift_jastrow']	# Diagonal shift for the Jastrow optimization
 
-n_iter = pars['n_iter']
-lrate = pars['lrate']
-dshift = pars['dshift']
+n_iter = pars['n_iter']	# Number of optimization steps for the full network
+lrate = pars['lrate']	# Learning rate for the full network optimization
+dshift = pars['dshift']	# Diagonal shift for the full network optimization
 
-ham_dtype = pars['ham_dtype']
-sampler_dtype = pars['sampler_dtype']
-model_dtype = pars['model_dtype']
+ham_dtype = pars['ham_dtype']	# Data type of the Hamiltonian
+sampler_dtype = pars['sampler_dtype']	# Data type of the configurations
+model_dtype = pars['model_dtype']	# Data type of the parameters of the variatonal Ansatz
 
 ##
 
