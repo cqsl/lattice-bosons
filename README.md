@@ -22,7 +22,7 @@ Quick example (8x8 at $U=8J$):
 
 ## Software version
 
-This code was successfully tested on GPU with CUDA V12.4.131 and the following environment:
+This code was successfully tested on GPU with python 3.11.7, CUDA V12.4.131 and the following environment (see `requirements.txt`):
 
 | package | version |
 | --- | --- |
