@@ -13,11 +13,11 @@ from itertools import islice, repeat, chain
 from jax._src import core
 from jax._src.typing import Array, ArrayLike
 from jax._src.numpy.util import check_arraylike, promote_dtypes_inexact
-from jax._src.random import RealArray, Shape, KeyArray, randint, uniform
+from jax._src.random import RealArray, Shape, randint, uniform
 
 
 def batch_choice(
-        key: KeyArray,
+        key: Array,
         a: Union[int, ArrayLike],
         p: Optional[RealArray] = None,
         shape: Shape = (1,),
